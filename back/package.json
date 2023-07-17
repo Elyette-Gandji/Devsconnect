@@ -2,10 +2,10 @@
   "name": "back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "back/index.js",
   "scripts": {
-    "dev": "nodemon ./back/index.js",
-    "start": "node ./back/index.js"
+    "dev": "NODE_ENV=development DEBUG=app:* npx nodemon",
+    "start": "NODE_ENV=production node back/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,14 +16,12 @@
     "cors": "^2.8.5",
     "debug": "^4.3.4",
     "dotenv": "^16.3.1",
-    "eslint": "^8.45.0",
     "express": "^4.18.2",
     "faker": "^6.6.6",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.1",
     "nodemon": "^3.0.1",
     "pg": "^8.11.1",
-    "sequelize": "^6.32.1",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"
   }
