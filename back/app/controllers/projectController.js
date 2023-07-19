@@ -5,7 +5,8 @@ const projectUserMapper = require('../dataMappers/projectUserMapper');
 const projectController = {
     async getAllProjects(_, res) {
       const projects = await projectMapper.findAllProjects();
-      res.json({status: 'success', data: projects})
+      //res.json({status: 'success', data: projects})
+      res.render('pages/projects', { projects });
     },
 
     //cette méthode récupère l'id dans les paramètres de la requête 

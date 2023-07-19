@@ -1,8 +1,23 @@
 {
+  "name": "devsconnect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:back\" \"npm run start:front\"",
+    "start:back": "cd back && npm start",
+    "start:front": "cd front && npm start",
+    "build:front": "cd front && npm run build"
+  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
     "eslint": "^8.45.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-editorconfig": "^4.0.3",
     "eslint-plugin-import": "^2.27.5"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0"
   }
 }

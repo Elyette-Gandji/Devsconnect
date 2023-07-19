@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development DEBUG=app:* npx nodemon",
-    "start": "NODE_ENV=production node index.js"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
