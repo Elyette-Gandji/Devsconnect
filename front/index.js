@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
   res.render('accueil');
 });
 
-/* Route pour la page "projets"
+// Route pour la page "projets"
 app.get('/projects', (req, res) => {
   // Effectuer la requête GET vers votre API back-end
   fetch('http://localhost:4000/api/projects')
@@ -42,7 +42,7 @@ app.get('/projects', (req, res) => {
       // En cas d'erreur, affichez un message d'erreur ou redirigez l'utilisateur vers une page d'erreur
       return response.json({ error: 'Error fetching projects' });
     });
-}); */
+});
 
 // Lancer le serveur HTTP
 app.listen(port, () => {

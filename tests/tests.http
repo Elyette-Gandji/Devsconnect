@@ -50,9 +50,9 @@ Authorization: Bearer
 ###
 
 # @name editUser
-PUT {{baseUrl}}/api/users/16
+PUT {{baseUrl}}/api/users/1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiZWhAZ21haWwuY29tIiwiaWQiOjE2fSwiaWF0IjoxNjg3NDQyMTY3LCJleHAiOjE2ODc0OTYxNjd9.G6FNEZMp809EEZT5ZU_N4jRfKtzDHYurv7PLAdgaEsc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoibnVtZXJvQGJpcy5lZyIsImlkIjoxfSwiaWF0IjoxNjg5ODQyODY2LCJleHAiOjE2ODk4NDM3NjZ9.4pMcGSr5FHp9yCD5e5nTiACyBPakubR92f2s5lBmU5A
 
 {
   "name": "E",

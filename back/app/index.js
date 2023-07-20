@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 
 //Problème avec React Native, on ne peut pas envoyer de données en multipart/form-data
 
-app.use((req,res,next) => {
+/* app.use((req,res,next) => {
   if(req.body.tags){
     const tags = req.body.tags;
     if (typeof tags === 'string'){
@@ -54,7 +54,7 @@ app.use((req,res,next) => {
   }
 
   next ();
-});
+}); */
 
 // ça dit à express d'utiliser ejs (ça remplace le require)
 app.set('view engine', 'ejs');
