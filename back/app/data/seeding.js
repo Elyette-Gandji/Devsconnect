@@ -1,6 +1,5 @@
 const { fakerFR } = require('@faker-js/faker');
-const client = require('../app/dataMappers/database');
-
+const client = require('../dataMappers/database');
 const NB_USERS = 200;
 const NB_PROJECTS = 40;
 const faker = fakerFR;
