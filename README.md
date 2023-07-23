@@ -22,6 +22,9 @@ O'clock TP project
 
 ## Frontend
 
-- EJS : moteur de template
-- Tailwind : framework CSS
-- Parcel : bundler pour compiler les fichiers CSS, JS et EJS
+- React : permet de faire une SPA (single page application) et d’avoir des interfaces utilisateur interactives et réactives
+- SCSS : CSS avec plus de possibilités
+- Vite : améliore la rapidité de développement en offrant un serveur de développement rapide d'applications web modernes
+- Axios : permet d’effectuer des requêtes HTTP depuis le navigateur de manière simple et fiable
+- Redux/React-redux : permet de gérer efficacement l'état global de l’application React et faciliter le partage des données entre les composants
+- Typescript : langage de programmation pour typage statique
