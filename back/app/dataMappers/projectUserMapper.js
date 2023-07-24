@@ -4,8 +4,13 @@ const ApiError = require('../errors/apiError.js');
 //Si user_id de la table project est le même que user_id dans la table project_has_user, alors is_active = true
 const createProjectHasUser = async (projectId, userId) => {
   const preparedQuery = {
-    text: 'INSERT INTO "project_has_user" ("project_id", "user_id", "is_active") VALUES ($1, $2, CASE WHEN "user_id" = $2 THEN true ELSE false END) RETURNING *',
-    values: [projectId, userId, true],
+    text: `
+      INSERT INTO "project_has_user" ("project_id", "user_id", "is_active")
+      SELECT $1, $2, CASE WHEN "project"."user_id" = $2 THEN TRUE ELSE FALSE END
+      FROM "project"
+      WHERE "project"."id" = $1
+      RETURNING *`,
+    values: [projectId, userId],
   };
   const results = await client.query(preparedQuery);
   if (!results.rows[0]) {
