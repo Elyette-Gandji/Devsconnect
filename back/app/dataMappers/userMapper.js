@@ -24,7 +24,7 @@ const findAllUsers = async () => {
   const preparedQuery ={
     text: `SELECT
       "user"."id",
-      "user"."name",
+      "user"."lastname",
       "user"."firstname",
       "user"."pseudo",
       "user"."description",
@@ -56,7 +56,7 @@ const findOneUser = async(id) => {
   const preparedQuery = {
     text: `SELECT
     "user"."id",
-    "user"."name",
+    "user"."lastname",
     "user"."firstname",
     "user"."pseudo",
     "user"."email",
@@ -103,10 +103,10 @@ const removeOneUser = async(id) => {
   return results;
 }
 
-const createOneUser = async (name, firstname, email, pseudo, password, description, availability, tags) => {
+const createOneUser = async (lastname, firstname, email, pseudo, password, description, availability, tags) => {
   const preparedUserQuery = {
-    text: `INSERT INTO "user" ("name", "firstname", "email", "pseudo", "password", "description", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-    values: [name, firstname, email, pseudo, password, description, availability],
+    text: `INSERT INTO "user" ("lastname", "firstname", "email", "pseudo", "password", "description", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+    values: [lastname, firstname, email, pseudo, password, description, availability],
   };
 
   const [user] = (await client.query(preparedUserQuery)).rows;
@@ -144,7 +144,7 @@ const updateOneUser = async (userId, userUpdate) => {
     
   const preparedQuery = {
     text: `UPDATE "user"
-    SET "name" = COALESCE($1, "name"), 
+    SET "lastname" = COALESCE($1, "lastname"), 
         "firstname" = COALESCE($2, "firstname"), 
         "email" = COALESCE($3, "email"), 
         "pseudo" = COALESCE($4, "pseudo"), 
@@ -153,9 +153,9 @@ const updateOneUser = async (userId, userUpdate) => {
         "availability" = COALESCE($7, "availability"),
         "updated_at"= NOW()
     WHERE "id"=$8 
-    RETURNING "name", "firstname", "email", "pseudo", "description", "availability", "updated_at"`,
+    RETURNING "lastname", "firstname", "email", "pseudo", "description", "availability", "updated_at"`,
     values: [
-      userUpdate.name,
+      userUpdate.lastname,
       userUpdate.firstname,
       userUpdate.email,
       userUpdate.pseudo,

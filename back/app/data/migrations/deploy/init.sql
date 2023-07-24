@@ -4,12 +4,13 @@ BEGIN;
 
 CREATE TABLE "user" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    "name" VARCHAR(64) NOT NULL,
+    "lastname" VARCHAR(64) NOT NULL,
     "firstname" VARCHAR(64) NOT NULL, 
     "email" VARCHAR(64) NOT NULL UNIQUE,
     "pseudo" VARCHAR(64) NOT NULL UNIQUE,
     "password" VARCHAR(64) NOT NULL,
     "description" TEXT,
+    "picture" TEXT,
     "availability" BOOLEAN DEFAULT FALSE,
     "refresh_token" TEXT,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),

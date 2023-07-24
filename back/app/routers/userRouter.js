@@ -33,9 +33,9 @@ module.exports = router;
 *         id:
 *           type: integer
 *           description: The auto-generated id of the user
-*         name:
+*         lastname:
 *           type: string
-*           description: The user name
+*           description: The user lastname
 *         firstname:
 *           type: string
 *           description: The user firstname
@@ -82,7 +82,7 @@ module.exports = router;
 *           description: The auto-generated time of the user's update
 *       example:
 *         id: 1
-*         name: Captain
+*         lastname: Captain
 *         firstname: Haddock
 *         email: captain@gmail.com
 *         pseudo: Moussaillon
@@ -104,9 +104,9 @@ module.exports = router;
 *       required:
 *         - id
 *       properties:
-*         name:
+*         lastname:
 *           type: string
-*           description: The user name
+*           description: The user lastname
 *         firstname:
 *           type: string
 *           description: The user firstname
@@ -131,7 +131,7 @@ module.exports = router;
 *             type: integer
 *           description: Array with all tags id of the user
 *       example:
-*         name: Captain
+*         lastname: Captain
 *         firstname: Haddock
 *         email: captain@gmail.com
 *         pseudo: Moussaillon
@@ -148,15 +148,15 @@ module.exports = router;
 *     Users POST:
 *       type: object
 *       required:
-*         - name
+*         - lastname
 *         - firstname
 *         - email
 *         - pseudo
 *         - password
 *       properties:
-*         name:
+*         lastname:
 *           type: string
-*           description: The user name
+*           description: The user lastname
 *         firstname:
 *           type: string
 *           description: The user firstname
@@ -181,7 +181,7 @@ module.exports = router;
 *             type: integer
 *           description: Array with all tags id of the project
 *       example:
-*         name: Captain
+*         lastname: Captain
 *         firstname: Haddock
 *         email: captain@gmail.com
 *         pseudo: Moussaillon

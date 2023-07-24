@@ -1,7 +1,7 @@
 const { fakerFR } = require('@faker-js/faker');
 const client = require('../dataMappers/database');
-const NB_USERS = 200;
-const NB_PROJECTS = 40;
+const NB_USERS = 50;
+const NB_PROJECTS = 20;
 const faker = fakerFR;
 const tags = ['Java', 'Javascript', 'HTML', 'CSS', 'React', 'SQL', 'Python', 'C',
  'C++', 'PHP', 'Go', 'Jest', 'Joi', 'COBOL', 'GraphQL', 'Faker', 'TypeScript', 'Bootstrap', 'Angular', 'Rust'];
@@ -15,12 +15,13 @@ function generateUser(nbUsers) {
   const users = [];
   for (let i = 0; i < nbUsers; i++) {
     const user = {
-      name: faker.person.lastName(),
+      lastname: faker.person.lastName(),
       firstname: faker.person.firstName(),
       pseudo: faker.internet.userName(),
       email: faker.internet.email(),
       password: '$2b$10$3i3kHi8MZDpmLW1icHax5u69KOvYOgIWkFkz1dKgKOlE64sRQCRZ.',
       description: faker.person.bio(),
+      picture: faker.image.avatar(),
       availability: faker.datatype.boolean(),
     };
     users.push(user);
@@ -30,24 +31,26 @@ function generateUser(nbUsers) {
 
 async function insertUsers(users) {
   const usersValues = users.map((user) => `(
-    '${user.name}',
+    '${user.lastname}',
     '${user.firstname}',
     '${user.email}',
     '${user.pseudo}',
     '${user.password}',
     '${user.description}',
+    '${user.picture}',
     '${user.availability}'    
   )`);
 
   const queryStr = `
     INSERT INTO "user"
     (
-      "name",
+      "lastname",
       "firstname",
       "email",
       "pseudo",
       "password",
       "description",
+      "picture",
       "availability"
     )
     VALUES

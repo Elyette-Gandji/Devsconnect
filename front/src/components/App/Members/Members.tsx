@@ -91,7 +91,7 @@ function Members() {
       />
     );
   }
-
+console.log(members);
   // ? Rendu JSX
   return (
     <div className="Members">

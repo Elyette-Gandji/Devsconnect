@@ -109,7 +109,7 @@ function OneProject() {
   if (!project) {
     return (
       <NotFound
-        errorMessage="Désolé, ce membre est momentanément indisponible"
+        errorMessage="Désolé, ce projet est momentanément indisponible"
         errorStatus=""
       />
     );

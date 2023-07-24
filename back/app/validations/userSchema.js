@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const userCreate = Joi.object({
-  name: Joi.string()
+  lastname: Joi.string()
     .max(30)
     .required(),
   firstname: Joi.string()
@@ -24,7 +24,7 @@ const userCreate = Joi.object({
 });
 
 const userUpdate = Joi.object({
-  name: Joi.string()
+  lastname: Joi.string()
     .max(30),
   firstname: Joi.string()
     .max(30),

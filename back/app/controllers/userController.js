@@ -80,10 +80,10 @@ const userController = {
   // méthode pour s'enregistrer / création d'un nouvel utilisateur
   // cette méthode récupère les données dans le body de la requête
   async register(req, res) {
-    const { name, firstname, email, pseudo, password, description, availability, tags } = req.body;
+    const {lastname, firstname, email, pseudo, password, description, availability, tags } = req.body;
     const hashedPWD = await bcrypt.hash(password, 10);
 
-    if (!name || !firstname || !email || !pseudo || !password) {
+    if (!lastname || !firstname || !email || !pseudo || !password) {
       throw new ApiError('Missing information', { statusCode: 400 });
     }
 
@@ -97,15 +97,15 @@ const userController = {
       throw new ApiError('Pseudo already used', { statusCode: 400 });
     }
 
-    await userMapper.createOneUser(name, firstname, email, pseudo, hashedPWD, description, availability, tags);
+    await userMapper.createOneUser(lastname, firstname, email, pseudo, hashedPWD, description, availability, tags);
     res.json({status: 'success' });
   },
 
   async editOneUser(req, res) {
     const userId = req.params.id;
-    const { name, firstname, email, pseudo, password, description, availability, tags } = req.body;
+    const {lastname, firstname, email, pseudo, password, description, availability, tags } = req.body;
     console.log(req.body);
-    const update = {name, firstname, email, pseudo, password, description, availability, tags};
+    const update = {lastname, firstname, email, pseudo, password, description, availability, tags};
     console.log(update);
 
     if (password === "") {

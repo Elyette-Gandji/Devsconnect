@@ -11,6 +11,11 @@ import { MemberI, ProjectI, TagI } from '../../../../@types/interface';
 
 // ? Fonction principale
 function ProjectCard(project: ProjectI) {
+
+  if (!project) {
+    return null; // Si project est null, ne rien afficher - à afficher avant la destructuration
+  }
+
   const {
     id,
     title,
@@ -20,12 +25,10 @@ function ProjectCard(project: ProjectI) {
     tags,
     description,
     users,
-  } = project.project;
+  } = project; // erreur : remplace = project.project;
 
   // ? Rendu JSX
-  if (!project) {
-    return null; // Si project est null, ne rien afficher
-  }
+
 
   return (
     /** //! Lien vers le projet

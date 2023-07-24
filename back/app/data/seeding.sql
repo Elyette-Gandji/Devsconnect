@@ -3,11 +3,11 @@ BEGIN;
 
 TRUNCATE "user", "project", "tag", "project_has_tag", "user_has_tag", "project_has_user" RESTART IDENTITY;
 
-INSERT INTO "user" (name, firstname, email, pseudo, password, description, availability) VALUES
-('Gandji', 'Elyette', 'numero@bis.eg', 'Numérobis', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Dernière pyramide à gauche', true),
-('Mangeot', 'Pierre', 'amon@bofis.eg', 'Amonbofis', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Première pyramide à droite', false),
-('Danglot', 'Clément', 'pano@ramix.ga', 'Panoramix', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Grande hutte à la sortie du village', true),
-('Caro', 'Lionel', 'ide@fix.ga', 'Idefix', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Le plus grand flair de la Gaule', false);
+INSERT INTO "user" (lastname, firstname, email, pseudo, password, description, picture, availability) VALUES
+('Gandji', 'Elyette', 'numero@bis.eg', 'Numérobis', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Dernière pyramide à gauche', '', true),
+('Mangeot', 'Pierre', 'amon@bofis.eg', 'Amonbofis', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Première pyramide à droite', '', false),
+('Danglot', 'Clément', 'pano@ramix.ga', 'Panoramix', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Grande hutte à la sortie du village', '', true),
+('Caro', 'Lionel', 'ide@fix.ga', 'Idefix', '$2b$10$/tjXc178bCzCqH8512QWeucDeWQN62.oDuaikIDTAQha8nkDa7A7i', 'Le plus grand flair de la Gaule', '', false);
 
 
 INSERT INTO "project" (title, description, availability, user_id) VALUES 

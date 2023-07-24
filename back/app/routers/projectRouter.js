@@ -1,28 +1,29 @@
-const express = require("express");
-const projectController = require("../controllers/projectController");
-const controllerHandler = require("../helpers/controllerHandler");
+const express = require('express');
+const projectController = require('../controllers/projectController');
+const controllerHandler = require('../helpers/controllerHandler');
 const { authorize } = require('../auth');
-const { projectCreate , projectUpdate } = require('../validations/projectSchema');
+const { projectCreate, projectUpdate } = require('../validations/projectSchema');
 const validate = require('../validations/validate');
+
 const router = express.Router();
 
-router.get("/", controllerHandler(projectController.getAllProjects));
-router.get("/:id", controllerHandler(projectController.getOneProject));
+router.get('/', controllerHandler(projectController.getAllProjects));
+router.get('/:id', controllerHandler(projectController.getOneProject));
 
-router.post("/", validate(projectCreate, 'body'), authorize('create', 'project'), controllerHandler(projectController.addOneProject));
+router.post('/', validate(projectCreate, 'body'), authorize('create', 'project'), controllerHandler(projectController.addOneProject));
 
-router.put("/:id", validate(projectUpdate, 'body'), authorize('modify', 'project'), controllerHandler(projectController.editOneProject));
+router.put('/:id', validate(projectUpdate, 'body'), authorize('modify', 'project'), controllerHandler(projectController.editOneProject));
 
-router.delete("/:id", authorize('delete', 'project'), controllerHandler(projectController.deleteOneProject));
+router.delete('/:id', authorize('delete', 'project'), controllerHandler(projectController.deleteOneProject));
 
+// ajouter les verifications d'autorisations a auth/index.js
+router.post('/:projectId/user/:userId', controllerHandler(projectController.addUserToProject));
 
-//ajouter les verifications d'autorisations a auth/index.js
-router.post("/:projectId/user/:userId", authorize('add', 'projectHasUser'), controllerHandler(projectController.addUserToProject));
+router.put('/:projectId/user/:userId', authorize('accept', 'projectHasUser'), controllerHandler(projectController.updateUserToProject));
 
-router.put("/:projectId/user/:userId", authorize('accept', 'projectHasUser'), controllerHandler(projectController.updateUserToProject));
+router.delete('/:projectId/user/:userId', authorize('remove', 'projectHasUser'), controllerHandler(projectController.deleteUserToProject));
 
-router.delete("/:projectId/user/:userId", authorize('remove', 'projectHasUser'), controllerHandler(projectController.deleteUserToProject));
-
+router.post('/checkTitle', controllerHandler(projectController.checkTitle));
 
 module.exports = router;
 

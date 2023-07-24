@@ -5,11 +5,11 @@ const ApiError = require('../errors/apiError.js');
 const createProjectHasUser = async (projectId, userId) => {
   const preparedQuery = {
     text: `
-      INSERT INTO "project_has_user" ("project_id", "user_id", "is_active")
-      SELECT $1, $2, CASE WHEN "project"."user_id" = $2 THEN TRUE ELSE FALSE END
-      FROM "project"
-      WHERE "project"."id" = $1
-      RETURNING *`,
+    INSERT INTO "project_has_user" ("project_id", "user_id", "is_active")
+    SELECT $1, $2, CASE WHEN "project"."user_id" = $2 THEN TRUE ELSE FALSE END
+    FROM "project"
+    WHERE "project"."id" = $1
+    RETURNING *`,
     values: [projectId, userId],
   };
   const results = await client.query(preparedQuery);

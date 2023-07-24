@@ -12,6 +12,11 @@ const findAllProjects = async () => {
     "project"."availability",
     "project"."user_id",
     (
+      SELECT "user"."pseudo"
+      FROM "user"
+      WHERE "user"."id" = "project"."user_id"
+    ) AS user_pseudo,
+    (
       SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
       FROM (
         SELECT DISTINCT "tag"."id", "tag"."name"
@@ -45,43 +50,62 @@ const findOneProject = async (id) => {
     "project"."description",
     "project"."availability",
     "project"."user_id",
+
     (  
-        SELECT "user"."pseudo"
-        FROM "user"
-        WHERE "user"."id" = "project"."user_id"
+      SELECT "user"."pseudo"
+      FROM "user"
+      WHERE "user"."id" = "project"."user_id"
     ) AS user_pseudo,
-    (
-        SELECT json_agg(json_build_object('tag_id', "tag"."id", 'tag_name', "tag"."name"))
-        FROM (
-            SELECT DISTINCT ON ("tag"."id") "tag"."id", "tag"."name"
-            FROM "tag"
-            INNER JOIN "project_has_tag" ON "project_has_tag"."tag_id" = "tag"."id"
-            WHERE "project_has_tag"."project_id" = "project"."id"
-            ORDER BY "tag"."id"
-        ) AS "tag"
+
+  (
+      SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
+      FROM (
+          SELECT DISTINCT ON ("tag"."id") "tag"."id", "tag"."name"
+          FROM "tag"
+          INNER JOIN "project_has_tag" ON "project_has_tag"."tag_id" = "tag"."id"
+          WHERE "project_has_tag"."project_id" = "project"."id"
+          ORDER BY "tag"."id"
+      ) AS "tag"
     ) AS "tags",
+    
     (
-        SELECT json_agg(json_build_object('user_id', "user"."id", 'pseudo', "user"."pseudo", 'is_active', "user"."is_active"))
-        FROM (
-            SELECT DISTINCT ON ("user"."id") "user"."id", "user"."pseudo", "project_has_user"."is_active"
-            FROM "user"
-            INNER JOIN "project_has_user" ON "project_has_user"."user_id" = "user"."id"
-            WHERE "project_has_user"."project_id" = "project"."id"
-            ORDER BY "user"."id"
-        ) AS "user"
+      SELECT json_agg(json_build_object('user_id', "user"."id", 'id', "user"."id", 'pseudo', "user"."pseudo", 'is_active', "user"."is_active", 'firstname', "user"."firstname", 'lastname', "user"."lastname", 'email', "user"."email", 'description', "user"."description", 'picture', "user"."picture", 'availability', "user"."availability",
+
+        'tags', (
+          SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
+          FROM "tag"
+          INNER JOIN "user_has_tag" ON "user_has_tag"."tag_id" = "tag"."id"
+          WHERE "user_has_tag"."user_id" = "user"."id"
+        ),
+
+        'projects', (
+          SELECT json_agg(json_build_object('id', "project"."id", 'title', "project"."title"))
+          FROM "project"
+          INNER JOIN "project_has_user" ON "project_has_user"."project_id" = "project"."id"
+          WHERE "project_has_user"."user_id" = "user"."id"
+        )
+      )
+    )
+      FROM (
+        SELECT DISTINCT ON ("user"."id") "user"."id", "user"."pseudo", "project_has_user"."is_active", "user"."firstname", "user"."lastname", "user"."email", "user"."description", "user"."picture", "user"."availability"
+        FROM "user"
+        INNER JOIN "project_has_user" ON "project_has_user"."user_id" = "user"."id"
+        WHERE "project_has_user"."project_id" = "project"."id"
+        ORDER BY "user"."id"
+      ) AS "user"
     ) AS "users"
-FROM
-    "project"
-WHERE
-    "project"."id" = $1;`,
+  FROM
+      "project"
+  WHERE
+      "project"."id" = $1;`,
     values: [id],
   };
   const results = await client.query(preparedQuery);
   if (!results.rows[0]) {
     throw new ApiError('Project not found', { statusCode: 204 });
   }
-  return results.rows[0]; 
-}
+  return results.rows[0];
+};
 
 const removeOneProject = async(id) => {
   const preparedQuery = {
@@ -118,7 +142,20 @@ const createOneProject = async(title, description, availability, user_id, tags) 
     return tagResults;
   });
 
-  await Promise.all(addTagsToProject);
+  const tagsResults = await Promise.all(addTagsToProject);
+
+  // Récupérez les ID des tags associés au projet
+  const tagIds = tagsResults.map((tagResult) => tagResult.tag_id);
+
+  // Effectuez une requête pour récupérer les informations complètes des tags correspondant aux ID
+  const preparedTagsQuery = {
+    text: 'SELECT * FROM "tag" WHERE "id" = ANY($1)',
+    values: [tagIds],
+  };
+  const tagsData = (await client.query(preparedTagsQuery)).rows;
+
+  // Ajoutez les informations complètes des tags au projet
+  project.tags = tagsData;
 
   // ajout du titulaire du projet dans projectHasUser
   await projectUserMapper.createProjectHasUser(project.id, project.user_id);

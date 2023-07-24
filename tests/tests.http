@@ -20,7 +20,7 @@ content-type: application/json
 Authorization: Bearer
 
 {
-  "name": "E",
+  "lastname": "E",
   "firstname": "Haddock",
   "email": "eh@gmail.com",
   "pseudo": "Bloup",
@@ -55,7 +55,7 @@ content-type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoibnVtZXJvQGJpcy5lZyIsImlkIjoxfSwiaWF0IjoxNjg5ODQyODY2LCJleHAiOjE2ODk4NDM3NjZ9.4pMcGSr5FHp9yCD5e5nTiACyBPakubR92f2s5lBmU5A
 
 {
-  "name": "E",
+  "lastname": "E",
   "firstname": "Haddock",
   "email": "eh@gmail.com",
   "pseudo": "Bloup",
