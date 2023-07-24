@@ -3,7 +3,7 @@ import axios from 'axios';
 import logout from '../store/actions/logout';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:4000',
   headers: {
     'content-type': 'application/json',
   },
