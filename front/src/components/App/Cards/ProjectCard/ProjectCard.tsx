@@ -25,7 +25,7 @@ function ProjectCard(project: ProjectI) {
     tags,
     description,
     users,
-  } = project; // erreur : remplace = project.project;
+  } = project; // erreur ? -> remplace = project.project;
 
   // ? Rendu JSX
 

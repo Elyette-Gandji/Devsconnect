@@ -27,6 +27,7 @@ const findAllUsers = async () => {
       "user"."lastname",
       "user"."firstname",
       "user"."pseudo",
+      "user"."email",
       "user"."description",
       "user"."availability",
       (
@@ -51,6 +52,21 @@ const findAllUsers = async () => {
   const results = await client.query(preparedQuery);
   return results.rows; 
 }
+const findOneUserX = async (id) => {
+  const preparedQuery = {
+    text: `SELECT
+    "user"."id",
+    "user"."password"
+    FROM "user"
+    WHERE "id" = $1`,
+    values: [id],
+  };
+  const results = await client.query(preparedQuery);
+  if (!results.rows[0]) {
+    throw new ApiError('User not found', { statusCode: 204 });
+  }
+  return results.rows[0];
+};
 
 const findOneUser = async(id) => {
   const preparedQuery = {
@@ -103,10 +119,10 @@ const removeOneUser = async(id) => {
   return results;
 }
 
-const createOneUser = async (lastname, firstname, email, pseudo, password, description, availability, tags) => {
+const createOneUser = async (lastname, firstname, email, pseudo, password, description, picture, availability, tags) => {
   const preparedUserQuery = {
-    text: `INSERT INTO "user" ("lastname", "firstname", "email", "pseudo", "password", "description", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
-    values: [lastname, firstname, email, pseudo, password, description, availability],
+    text: `INSERT INTO "user" ("lastname", "firstname", "email", "pseudo", "password", "description", "picture", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+    values: [lastname, firstname, email, pseudo, password, description, picture, availability],
   };
 
   const [user] = (await client.query(preparedUserQuery)).rows;
@@ -150,9 +166,10 @@ const updateOneUser = async (userId, userUpdate) => {
         "pseudo" = COALESCE($4, "pseudo"), 
         "password" = COALESCE($5, "password"), 
         "description" = COALESCE($6, "description"), 
-        "availability" = COALESCE($7, "availability"),
+        "picture" = COALESCE($7, "picture"),
+        "availability" = COALESCE($8, "availability"),
         "updated_at"= NOW()
-    WHERE "id"=$8 
+    WHERE "id"=$9 
     RETURNING "lastname", "firstname", "email", "pseudo", "description", "availability", "updated_at"`,
     values: [
       userUpdate.lastname,
@@ -161,6 +178,7 @@ const updateOneUser = async (userId, userUpdate) => {
       userUpdate.pseudo,
       userUpdate.password,
       userUpdate.description,
+      userUpdate.picture,
       userUpdate.availability,
       userId
     ],
@@ -197,6 +215,7 @@ module.exports = {
   setRefreshToken,
   getRefreshToken,
   findAllUsers,
+  findOneUserX,
   findOneUser,
   removeOneUser,
   createOneUser,

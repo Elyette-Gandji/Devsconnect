@@ -117,7 +117,45 @@ const userController = {
 
     const user = await userMapper.updateOneUser(userId, update);
     res.json({status: 'success', data: user })
-  }
+  },
+
+  async checkPassword(req, res) {
+    // console.log(req.body);
+    const { oldPassword, id } = req.body;
+    const user = await userMapper.findOneUserX(id);
+    bcrypt.compare(oldPassword, user.password, (err, result) => {
+      if (err) {
+        return res.status(500).json({ message: 'Erreur lors de la vérification du mot de passe' });
+      }
+      if (!result) {
+        return res.json({ message: 'L\'ancien mot de passe est incorrect', status: 'error' });
+      }
+      return res.json({ message: 'L\'ancien mot de passe est correct', status: 'success' });
+    });
+  },
+
+  async checkPseudo(req, res) {
+    const { oldPseudo } = req.body;
+
+    const users = await userMapper.findAllUsers();
+    // console.log('users', users);
+    const foundUser = users.find((user) => user.pseudo === oldPseudo);
+
+    if (foundUser) {
+      return res.json({ message: 'Le pseudo n\'est pas disponible', status: 'error' });
+    }
+    return res.json({ message: 'Le pseudo est disponible', status: 'success' });
+  },
+
+  async checkEmail(req, res) {
+    const { oldEmail } = req.body;
+    const users = await userMapper.findAllUsers();
+    const foundUser = users.find((user) => user.email === oldEmail);
+    if (foundUser) {
+      return res.json({ message: 'L\'email n\'est pas disponible', status: 'error' });
+    }
+    return res.json({ message: 'L\'email est disponible', status: 'success' });
+  },
 };
 
 module.exports = userController;

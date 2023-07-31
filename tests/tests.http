@@ -8,7 +8,7 @@ POST {{baseUrl}}/login
 content-type: application/json
 
 {
-    "email": "numero@bis.eg",
+    "email": "Raphael.Marie@gmail.com",
     "password": "secret"
 }
 
@@ -20,12 +20,12 @@ content-type: application/json
 Authorization: Bearer
 
 {
-  "lastname": "E",
-  "firstname": "Haddock",
-  "email": "eh@gmail.com",
-  "pseudo": "Bloup",
-  "password": "harengs1234",
-  "description": "Vieux loup de mer",
+  "lastname": "Black",
+  "firstname": "Sirius ",
+  "email": "sirius@gmail.com",
+  "pseudo": "Sisi",
+  "password": "secret",
+  "description": "Tout droit sorti d'Azkaban",
   "availability": true,
   "tags": [
     1,
@@ -50,25 +50,23 @@ Authorization: Bearer
 ###
 
 # @name editUser
-PUT {{baseUrl}}/api/users/1
+PUT {{baseUrl}}/api/users/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoibnVtZXJvQGJpcy5lZyIsImlkIjoxfSwiaWF0IjoxNjg5ODQyODY2LCJleHAiOjE2ODk4NDM3NjZ9.4pMcGSr5FHp9yCD5e5nTiACyBPakubR92f2s5lBmU5A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
 
 {
-  "lastname": "E",
-  "firstname": "Haddock",
-  "email": "eh@gmail.com",
-  "pseudo": "Bloup",
-  "password": "harengs1234",
-  "description": "Vieux loup de mer",
-  "availability": false,
+  "lastname": "Black",
+  "firstname": "Sirius ",
+  "email": "sirius@gmail.com",
+  "pseudo": "Sisi",
+  "password": "secret",
+  "description": "Tout droit sorti d'Azkaban",
+  "availability": true,
   "tags": [
     1,
-    3,
-    4
+    3
   ]
 }
-
 ###
 
 # @name deleteUser
@@ -86,7 +84,7 @@ Authorization: Bearer
 ###
 
 # @name getOneProject
-GET {{baseUrl}}/api/projects/1
+GET {{baseUrl}}/api/projects/24
 content-type: application/json
 Authorization: Bearer 
 
@@ -95,36 +93,35 @@ Authorization: Bearer
 # @name createProject
 POST {{baseUrl}}/api/projects
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoibnVtZXJvQGJpcy5lZyIsImlkIjoxfSwiaWF0IjoxNjg3NDQxMzU3LCJleHAiOjE2ODc0OTUzNTd9.25kfggQkvBCnQo02IERG6e8WCLZXypZIKXnyLMW84UI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
 
 {
-  "title": "Bisco98",
+  "title": "Harry Potter",
   "description": "Lorem ipsum blabla",
-  "availability": false,
-  "user_id": 1,
+  "availability": true,
+  "user_id": 51,
   "tags": [
-    2,
-    3,
-    4
+    1,
+    3
   ]
 }
 
 ###
 
 # @name editProject
-PUT {{baseUrl}}/api/projects/18
+PUT {{baseUrl}}/api/projects/25
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoibnVtZXJvQGJpcy5lZyIsImlkIjoxfSwiaWF0IjoxNjg3NDQyMzMyLCJleHAiOjE2ODc0OTYzMzJ9.VTt4NHNY9yi_0YMpVUx5TM-cZLj-LXCllSHyt7uLnC0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
 
 {
-  "title": "Bisco98",
+  "title": "Harry Potter 2",
   "description": "Lorem ipsum blabla",
-  "availability": true,
-  "user_id": 1,
+  "availability": false,
+  "user_id": 51,
   "tags": [
     1,
-    3,
-    5
+    5,
+    4
   ]
 }
 
@@ -138,16 +135,16 @@ Authorization: Bearer
 ###
 
 # @name applyToProject
-POST {{baseUrl}}/api/projects/1/user/3
+POST {{baseUrl}}/api/projects/3/user/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoicGFub0ByYW1peC5nYSIsImlkIjozfSwiaWF0IjoxNjg3NDI4NDYzLCJleHAiOjE2ODc0ODI0NjN9.rZSsmaEGXHmI1z8gcqxoZrSLDGykM_cKgYxUK89nNT8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
 
 ###
 
 # @name addUserToProject
-PUT {{baseUrl}}/api/projects/1/user/3
+PUT {{baseUrl}}/api/projects/3/user/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiY2FwdGFpbkBnbWFpbC5jb20iLCJpZCI6Mn0sImlhdCI6MTY4NzQyODEzMiwiZXhwIjoxNjg3NDgyMTMyfQ._XQgPEyfHOAOzBY-uXzYz_gSazIDA1jjbXrcYRL-mCc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiUmFwaGFlbC5NYXJpZUBnbWFpbC5jb20iLCJpZCI6MjN9LCJpYXQiOjE2OTA4Mjc5ODUsImV4cCI6MTY5MDgyODg4NX0.Y1upsPlkdFT-Q4vvmkk2mZKiCWpXCQN7ZA9VCMk0IV4
 
 ###
 

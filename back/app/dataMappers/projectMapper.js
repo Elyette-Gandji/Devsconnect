@@ -107,6 +107,7 @@ const findOneProject = async (id) => {
   return results.rows[0];
 };
 
+
 const removeOneProject = async(id) => {
   const preparedQuery = {
     text: `DELETE FROM "project" WHERE "id" = $1 RETURNING *`,
@@ -165,6 +166,7 @@ const createOneProject = async(title, description, availability, user_id, tags) 
 
 const updateOneProject = async (projectId, projectUpdate) => {
   const currentProject = await findOneProject(projectId);
+  console.log(currentProject);
   if (!currentProject) {
     throw new ApiError('Project not found', { statusCode: 204 });
   }
@@ -194,7 +196,6 @@ const updateOneProject = async (projectId, projectUpdate) => {
   };
   // destructuration de tableau pour récupérer le premier élément
   const [results] = (await client.query(preparedQuery)).rows;
-
   return results;
 };
 

@@ -6,12 +6,16 @@ const validate = require('../validations/validate');
 const { authorize } = require('../auth');
 const router = express.Router();
 
-router.get('/:id', controllerHandler(userController.getOneUser)); 
 router.get('/', controllerHandler(userController.getAllUsers)); 
+router.get('/:id', controllerHandler(userController.getOneUser)); 
 
 router.put('/:id', validate(userUpdate, 'body'),  authorize('modify', 'user'), controllerHandler(userController.editOneUser));
 
 router.delete('/:id', authorize('delete', 'user'), controllerHandler(userController.deleteOneUser)); 
+
+router.post('/checkPassword', controllerHandler(userController.checkPassword));
+router.post('/checkEmail', controllerHandler(userController.checkEmail));
+router.post('/checkPseudo', controllerHandler(userController.checkPseudo));
 
 module.exports = router;
 
