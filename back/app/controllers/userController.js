@@ -59,7 +59,7 @@ const userController = {
 
   async getAllUsers(_, res) {
     const users = await userMapper.findAllUsers();
-    //const users = await userMapper.getAllUsers();
+    console.log(users);
     res.json({status: 'success', data : users})
   },
 
@@ -67,7 +67,12 @@ const userController = {
   async getOneUser(req, res) {
     const userId = req.params.id;
     const user = await userMapper.findOneUser(userId);
-    //const user = await userMapper.getUserById(userId);
+    res.json({status: 'success', data : user})
+  },
+
+  async getOneUserX(req, res) {
+    const userId = req.params.id;
+    const user = await userMapper.findOneUserX(userId);
     res.json({status: 'success', data : user})
   },
 
@@ -138,7 +143,6 @@ const userController = {
     const { oldPseudo } = req.body;
 
     const users = await userMapper.findAllUsers();
-    // console.log('users', users);
     const foundUser = users.find((user) => user.pseudo === oldPseudo);
 
     if (foundUser) {

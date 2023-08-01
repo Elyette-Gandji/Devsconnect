@@ -29,6 +29,7 @@ const findAllUsers = async () => {
       "user"."pseudo",
       "user"."email",
       "user"."description",
+      "user"."picture",
       "user"."availability",
       (
         SELECT json_agg(json_build_object('id', "project"."id", 'title', "project"."title"))
@@ -77,6 +78,7 @@ const findOneUser = async(id) => {
     "user"."pseudo",
     "user"."email",
     "user"."description",
+    "user"."picture",
     "user"."availability",
     (
       SELECT json_agg(json_build_object('id', "project"."id", 'title', "project"."title", 'description', "project"."description", 'availability', "project"."availability"))
@@ -170,7 +172,7 @@ const updateOneUser = async (userId, userUpdate) => {
         "availability" = COALESCE($8, "availability"),
         "updated_at"= NOW()
     WHERE "id"=$9 
-    RETURNING "lastname", "firstname", "email", "pseudo", "description", "availability", "updated_at"`,
+    RETURNING "lastname", "firstname", "email", "pseudo", "description", "picture", "availability", "updated_at"`,
     values: [
       userUpdate.lastname,
       userUpdate.firstname,

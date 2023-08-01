@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/', controllerHandler(userController.getAllUsers)); 
 router.get('/:id', controllerHandler(userController.getOneUser)); 
+router.get('/user/:id', controllerHandler(userController.getOneUserX));
 
 router.put('/:id', validate(userUpdate, 'body'),  authorize('modify', 'user'), controllerHandler(userController.editOneUser));
 
