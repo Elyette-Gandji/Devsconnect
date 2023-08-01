@@ -25,7 +25,11 @@ function ProjectCard(project: ProjectI) {
     tags,
     description,
     users,
-  } = project; // erreur ? -> remplace = project.project;
+  } = project.project;  // why not just project? 
+  // Because project is an object with a key project, and we want to destructure the project object (the value of this key)
+  // in order to get the project object itself and not the project key
+  // so we need to rename the project key to something else (here project.project) in the destructuring, otherwise it will be a conflict with the project object
+  
 
   // ? Rendu JSX
 

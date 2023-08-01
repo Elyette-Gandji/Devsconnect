@@ -37,7 +37,7 @@ function CardMemberMini({ member }: CardMemberI) {
             </div>
             <div className="CardMemberMini--header--link--container">
               <img
-                src={`http://localhost:4000${picture}`}
+                src={picture} // après déploiement, il faudra changer l'url de l'image vers le dossier public du back
                 alt="profil"
                 title={pseudo}
                 className="CardMemberMini--header--link--container--img"
