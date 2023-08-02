@@ -1,7 +1,6 @@
 const projectMapper = require('../dataMappers/projectMapper');
 const projectUserMapper = require('../dataMappers/projectUserMapper');
 
-//controller pour les projects sans refacto d'un controllerHandler et sans gestion centralisee des erreurs
 const projectController = {
     async getAllProjects(_, res) {
       const projects = await projectMapper.findAllProjects();

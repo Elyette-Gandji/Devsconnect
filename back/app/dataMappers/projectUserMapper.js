@@ -19,6 +19,7 @@ const createProjectHasUser = async (projectId, userId) => {
   return results.rows[0];
 };
 
+// TODO : vérifier que le owner du projet ne peut pas se supprimer pas lui-même
 const updateProjectHasUser = async(projectId, userId) => {
   const result = await client.query(`UPDATE "project_has_user" 
     SET "is_active" = NOT"is_active"
@@ -32,6 +33,7 @@ const updateProjectHasUser = async(projectId, userId) => {
   return result.rows[0]; 
 }
 
+// TODO : vérifier que le owner du projet ne peut pas se supprimer pas lui-même
 const deleteProjectHasUser = async(projectId, userId) => {
   const preparedQuery = {
     text: `DELETE FROM "project_has_user" WHERE "project_id" = $1 AND "user_id" = $2 RETURNING *`,
