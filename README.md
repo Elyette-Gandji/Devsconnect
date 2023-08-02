@@ -9,6 +9,7 @@ O'clock TP project
 - Sqitch (outil de gestion de la bdd)
 - Dotenv (variables d'environnement)
 - Body-parser (récupérer les données envoyées dans le corps des requêtes HTTP)
+- Multer
 - Joi (validation des données entrantes)
 - Jsonwebtoken (authentification et la sécurisation des échanges de données)
 - Bcrypt (hacher et sécuriser les mots de passe)

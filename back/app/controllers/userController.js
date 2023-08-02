@@ -2,6 +2,7 @@ const userMapper = require('../dataMappers/userMapper');
 const auth = require('../auth');
 const bcrypt = require('bcrypt');
 const ApiError = require('../errors/apiError.js');
+const uploadPicture = require('../middleware/uploadPicture');
 
 const userController = {
   async login(request, response, next) {
@@ -69,6 +70,7 @@ const userController = {
     res.json({status: 'success', data : user})
   },
 
+  // TODO : vérifier si nécessaire
   async getOneUserX(req, res) {
     const userId = req.params.id;
     const user = await userMapper.findOneUserX(userId);
@@ -84,7 +86,7 @@ const userController = {
   // méthode pour s'enregistrer / création d'un nouvel utilisateur
   // cette méthode récupère les données dans le body de la requête
   async register(req, res) {
-    const {lastname, firstname, email, pseudo, password, description, availability, tags } = req.body;
+    const {lastname, firstname, email, pseudo, password, description, picture, availability, tags } = req.body;
     const hashedPWD = await bcrypt.hash(password, 10);
 
     if (!lastname || !firstname || !email || !pseudo || !password) {
@@ -101,7 +103,14 @@ const userController = {
       throw new ApiError('Pseudo already used', { statusCode: 400 });
     }
 
-    await userMapper.createOneUser(lastname, firstname, email, pseudo, hashedPWD, description, availability, tags);
+    // Si un fichier a été téléchargé, appelez uploadPicture pour traiter la photo de profil
+    if (req.file) {
+      picture = await uploadPicture(req, res, pseudo);
+    } else {
+      picture = '/public/profilPictures/profil.webp';
+    }
+
+    await userMapper.createOneUser(lastname, firstname, email, pseudo, hashedPWD, description, picture, availability, tags);
     res.json({status: 'success' });
   },
 
@@ -117,6 +126,13 @@ const userController = {
       update.password = hashed;
     };
 
+    let picture; // On déclare picture pour pouvoir l'utiliser dans le if/else suivant
+    // Si un fichier a été téléchargé, appelez uploadPicture pour traiter la photo de profil
+    if (req.file) {
+      picture = await uploadPicture(req, res, pseudo);
+      update.picture = picture;
+    }
+    
     const user = await userMapper.updateOneUser(userId, update);
     res.json({status: 'success', data: user })
   },
@@ -137,10 +153,8 @@ const userController = {
 
   async checkPseudo(req, res) {
     const { oldPseudo } = req.body;
-
     const users = await userMapper.findAllUsers();
     const foundUser = users.find((user) => user.pseudo === oldPseudo);
-
     if (foundUser) {
       return res.json({ message: 'Le pseudo n\'est pas disponible', status: 'error' });
     }

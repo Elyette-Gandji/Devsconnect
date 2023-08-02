@@ -53,6 +53,8 @@ const findAllUsers = async () => {
   const results = await client.query(preparedQuery);
   return results.rows; 
 }
+
+// recherche d'un utilisateur par son id pour la connexion
 const findOneUserX = async (id) => {
   const preparedQuery = {
     text: `SELECT
@@ -69,9 +71,10 @@ const findOneUserX = async (id) => {
   return results.rows[0];
 };
 
+//recherche d'un utilisateur par son id pour la page profil
 const findOneUser = async(id) => {
   const preparedQuery = {
-    text: `SELECT
+   /*  text: `SELECT
     "user"."id",
     "user"."lastname",
     "user"."firstname",
@@ -100,6 +103,52 @@ const findOneUser = async(id) => {
     ) AS "tags"
     FROM "user"
     WHERE "id" = $1`,
+    values: [id], */
+
+    // TODO : à valider --> provide firstname and lastname instead of pseudo
+    text: `SELECT
+    "user"."id",
+    "user"."lastname",
+    "user"."firstname",
+    "user"."pseudo",
+    "user"."email",
+    "user"."description",
+    "user"."availability",
+    "user"."picture",
+    (
+      SELECT json_agg(json_build_object('id', "project"."id", 'user_id', "project"."user_id", 'title', "project"."title", 'description', "project"."description", 'availability', "project"."availability", 'user_pseudo', 'user_firstname', 'user_lastname', (
+        SELECT "user"."pseudo", "user"."firstname", "user"."lastname"
+        FROM "user"
+        WHERE "user"."id" = "project"."user_id"
+      ), 'users', (
+        SELECT json_agg(json_build_object('id', "participant_user"."id", 'firstname', "participant_user"."firstname", 'lastname', "participant_user"."lastname", 'pseudo', "participant_user"."pseudo", 'is_active', "project_has_user"."is_active"))
+        FROM "user" AS "participant_user"
+        INNER JOIN "project_has_user" ON "participant_user"."id" = "project_has_user"."user_id"
+        WHERE "project_has_user"."project_id" = "project"."id"
+      ), 'tags', (
+        SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
+        FROM "tag"
+        INNER JOIN "project_has_tag" ON "tag"."id" = "project_has_tag"."tag_id"
+        WHERE "project_has_tag"."project_id" = "project"."id"
+      )))
+      FROM (
+        SELECT DISTINCT "project"."id", "project"."user_id", "project"."title", "project"."description", "project"."availability"
+        FROM "project"
+        INNER JOIN "project_has_user" ON "project"."id" = "project_has_user"."project_id"
+        WHERE "project_has_user"."user_id" = "user"."id"
+      ) AS "project"
+    ) AS "projects",
+    (
+      SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
+      FROM (
+        SELECT DISTINCT "tag"."id", "tag"."name"
+        FROM "tag"
+        INNER JOIN "user_has_tag" ON "tag"."id" = "user_has_tag"."tag_id"
+        WHERE "user_has_tag"."user_id" = "user"."id"
+      ) AS "tag"
+    ) AS "tags"
+  FROM "user"
+  WHERE "id" = $1`,
     values: [id],
   };
   const results = await client.query(preparedQuery);
@@ -123,7 +172,7 @@ const removeOneUser = async(id) => {
 
 const createOneUser = async (lastname, firstname, email, pseudo, password, description, picture, availability, tags) => {
   const preparedUserQuery = {
-    text: `INSERT INTO "user" ("lastname", "firstname", "email", "pseudo", "password", "description", "picture", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+    text: `INSERT INTO "user" ("lastname", "firstname", "email", "pseudo", "password", "description", "picture", "availability") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
     values: [lastname, firstname, email, pseudo, password, description, picture, availability],
   };
 

@@ -42,6 +42,7 @@ const findAllProjects = async () => {
   return results.rows; 
 }
 
+// TODO : à valider --> provide firstname and lastname instead of pseudo
 const findOneProject = async (id) => {
   const preparedQuery = {
     text: `SELECT
@@ -49,13 +50,13 @@ const findOneProject = async (id) => {
     "project"."title",
     "project"."description",
     "project"."availability",
-    "project"."user_id",
+    "project"."user_id", 
 
     (  
-      SELECT "user"."pseudo"
+      SELECT "user"."firstname", "user"."lastname"
       FROM "user"
       WHERE "user"."id" = "project"."user_id"
-    ) AS user_pseudo,
+    ) AS user_name,
 
   (
       SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
