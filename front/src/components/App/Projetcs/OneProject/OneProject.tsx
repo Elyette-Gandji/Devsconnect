@@ -18,10 +18,6 @@ import { toggleModalLogin } from '../../../../store/reducer/log';
 import ProjectMemberMini from '../../Cards/CardMemberMini/CardMemberMini';
 import NotFound from '../../../NotFound/NotFound';
 
-// ? Typage
-import { ProjectI } from '../../../../@types/interface';
-import MyProject from './MyProject/MyProject';
-
 // ? Styles
 import './style.scss';
 
@@ -45,7 +41,7 @@ function OneProject() {
   // ? useEffect
   useEffect(() => {
     if (id) dispatch(fetchOneProject(id)); // On récupère les infos du membre avec l'id en url
-  }, [dispatch, id]); // On met à jour le useEffect si l'id change
+  }, [dispatch, id, project?.users]); // On met à jour le useEffect si l'id change
 
   // ? Fonctions
   //* On vérifie si le membre est le propriétaire du projet
@@ -122,7 +118,11 @@ function OneProject() {
          * On envoie au composant la fonction navigate
          * A chaque clic sur le bouton, on retourne à la page précédente
          */}
-        <button type="button" onClick={() => navigate(-1)}>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className={window.history.length > 1 ? '' : 'hidden'}
+        >
           Retour
         </button>
       </div>
@@ -169,10 +169,19 @@ function OneProject() {
       <h4 className="Project--title">Participants :</h4>
       <div className="Project--thirdField">
         {project.users &&
+          project.users.map((user) =>
+            user.is_active ? (
+              <ProjectMemberMini key={user.id} member={user} />
+            ) : null
+          )}
+      </div>
+      <h4 className="Project--title">Postulant :</h4>
+      <div className="Project--thirdField">
+        {project.users &&
           project.users
             .filter((user) => user.id !== project.user_id)
             .map((user) =>
-              user.is_active ? (
+              !user.is_active ? (
                 <ProjectMemberMini key={user.id} member={user} />
               ) : null
             )}

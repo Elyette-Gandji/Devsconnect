@@ -105,10 +105,6 @@ function Projects() {
        * On envoie au composant la liste des membres
        * On envoie au composant la fonction pour mettre à jour la liste des membres filtrés
        */}
-      <FilterBar
-        projects={projects}
-        setFilteredProjects={setFilteredProjects}
-      />
       <ThemeProvider theme={paginationUITheme}>
         <TablePagination
           rowsPerPageOptions={[5, 10, 15, 20]}
@@ -124,6 +120,10 @@ function Projects() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </ThemeProvider>
+      <FilterBar
+        projects={projects}
+        setFilteredProjects={setFilteredProjects}
+      />
       <h2 className="Projects--title">Tous les projets</h2>
       {filteredProjects.length === 0 && (
         <p className="noResult">Aucun résultat pour vos critères</p>

@@ -59,7 +59,6 @@ const userController = {
 
   async getAllUsers(_, res) {
     const users = await userMapper.findAllUsers();
-    console.log(users);
     res.json({status: 'success', data : users})
   },
 
@@ -109,9 +108,7 @@ const userController = {
   async editOneUser(req, res) {
     const userId = req.params.id;
     const {lastname, firstname, email, pseudo, password, description, availability, tags } = req.body;
-    console.log(req.body);
     const update = {lastname, firstname, email, pseudo, password, description, availability, tags};
-    console.log(update);
 
     if (password === "") {
       delete update.password;
@@ -125,7 +122,6 @@ const userController = {
   },
 
   async checkPassword(req, res) {
-    // console.log(req.body);
     const { oldPassword, id } = req.body;
     const user = await userMapper.findOneUserX(id);
     bcrypt.compare(oldPassword, user.password, (err, result) => {

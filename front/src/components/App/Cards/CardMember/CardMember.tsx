@@ -53,7 +53,7 @@ function CardMember({ member }: CardMemberI) {
               </p>
             </div>
             <img
-              src={picture} // après déploiement, il faudra changer l'url de l'image vers le dossier public du back
+              src={picture}
               alt="profil"
               title={pseudo}
               className="CardMember--header--link--img"

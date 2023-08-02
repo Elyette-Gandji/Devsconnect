@@ -91,10 +91,25 @@ function Members() {
       />
     );
   }
-console.log(members);
+
   // ? Rendu JSX
   return (
     <div className="Members">
+      <ThemeProvider theme={paginationUITheme}>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 50]}
+          component="div"
+          labelRowsPerPage="Résultats par page"
+          labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} sur ${count !== -1 ? count : `plus de ${to}`}`
+          }
+          count={filteredMembers.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </ThemeProvider>
       {/**
        * //! FilterBar.tsx
        * @param {Array} members - Liste des membres
@@ -122,21 +137,6 @@ console.log(members);
             <CardMember key={member.id} member={member} />
           ))}
       </div>
-      <ThemeProvider theme={paginationUITheme}>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          component="div"
-          labelRowsPerPage="Résultats par page"
-          labelDisplayedRows={({ from, to, count }) =>
-            `${from}-${to} sur ${count !== -1 ? count : `plus de ${to}`}`
-          }
-          count={filteredMembers.length}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={rowsPerPage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </ThemeProvider>
     </div>
   );
 }

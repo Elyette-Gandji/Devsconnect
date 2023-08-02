@@ -166,7 +166,6 @@ const createOneProject = async(title, description, availability, user_id, tags) 
 
 const updateOneProject = async (projectId, projectUpdate) => {
   const currentProject = await findOneProject(projectId);
-  console.log(currentProject);
   if (!currentProject) {
     throw new ApiError('Project not found', { statusCode: 204 });
   }

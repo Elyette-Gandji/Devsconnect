@@ -499,7 +499,7 @@ function Signin() {
               src={
                 formFields.picture.value.includes('blob')
                   ? formFields.picture.value
-                  : '/images/profil/profil3.svg'
+                  : '/images/profil/profil.svg'
               }
               alt="profil"
               onClick={handleUploadClick}
@@ -763,7 +763,6 @@ function Signin() {
                   id="cgu"
                   onChange={handleCguChange}
                   checked={cgu}
-                  // inputProps={{ 'aria-label': 'controlled' }}
                   color="success"
                   size="large"
                   name="cgu"
@@ -778,11 +777,7 @@ function Signin() {
                 (voir les CGU)
               </Link>
             </div>
-            <button
-              type="submit"
-              className="Modale--form--container--confirm"
-              disabled={!cgu}
-            >
+            <button type="submit" className="Modale--form--container--confirm">
               S&apos;inscrire
             </button>
           </fieldset>
