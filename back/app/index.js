@@ -1,8 +1,8 @@
+require('dotenv').config();
 const express = require('express');
 const router = require('./routers');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path');
 
 const app = express();
 
@@ -20,7 +20,7 @@ const options = {
 		},
 		servers: [
 			{
-				url: "http://localhost:4000", 
+				url: "http://localhost:${port}", 
 			},
 		],
 	},
@@ -31,9 +31,10 @@ const specs = swaggerJsDoc(options);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-app.use(cors());
+app.use(cors('*'));
 
 // mise en place des methodes json et URL encoded dans l'app de l'api
+app.use('/public', express.static('public')); // fichiers statique
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());

@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const uploadPicture = async (req, res, pseudo) => {
+const uploadPictures = async (req, res, pseudo) => {
   if (!req.file) {
     return res.status(400).json({ message: 'Aucun fichier sélectionné' });
   }
@@ -30,4 +30,4 @@ const uploadPicture = async (req, res, pseudo) => {
   }
 };
 
-module.exports = uploadPicture;
+module.exports = uploadPictures;

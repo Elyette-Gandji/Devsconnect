@@ -6,11 +6,13 @@ const validate = require('../validations/validate');
 const { authorize } = require('../auth');
 const router = express.Router();
 
+const upload = require('../middlewares/multer');
+
 router.get('/', controllerHandler(userController.getAllUsers)); 
 router.get('/:id', controllerHandler(userController.getOneUser)); 
-router.get('/user/:id', controllerHandler(userController.getOneUserX));
+router.get('/user/:id', controllerHandler(userController.getOneUserX)); // TODO vérifier si nécessaire
 
-router.put('/:id', validate(userUpdate, 'body'),  authorize('modify', 'user'), controllerHandler(userController.editOneUser));
+router.put('/:id', upload.single('picture'), validate(userUpdate, 'body'), authorize('modify', 'user'), controllerHandler(userController.editOneUser));
 
 router.delete('/:id', authorize('delete', 'user'), controllerHandler(userController.deleteOneUser)); 
 

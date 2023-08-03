@@ -2,7 +2,7 @@ const userMapper = require('../dataMappers/userMapper');
 const auth = require('../auth');
 const bcrypt = require('bcrypt');
 const ApiError = require('../errors/apiError.js');
-const uploadPicture = require('../middleware/uploadPicture');
+const uploadPictures = require('../middlewares/uploadPictures');
 
 const userController = {
   async login(request, response, next) {
@@ -103,9 +103,9 @@ const userController = {
       throw new ApiError('Pseudo already used', { statusCode: 400 });
     }
 
-    // Si un fichier a été téléchargé, appelez uploadPicture pour traiter la photo de profil
+    // Si un fichier a été téléchargé, appelez uploadPictures pour traiter la photo de profil
     if (req.file) {
-      picture = await uploadPicture(req, res, pseudo);
+      picture = await uploadPictures(req, res, pseudo);
     } else {
       picture = '/public/profilPictures/profil.webp';
     }
@@ -127,9 +127,9 @@ const userController = {
     };
 
     let picture; // On déclare picture pour pouvoir l'utiliser dans le if/else suivant
-    // Si un fichier a été téléchargé, appelez uploadPicture pour traiter la photo de profil
+    // Si un fichier a été téléchargé, appelez uploadPictures pour traiter la photo de profil
     if (req.file) {
-      picture = await uploadPicture(req, res, pseudo);
+      picture = await uploadPictures(req, res, pseudo);
       update.picture = picture;
     }
     

@@ -18,7 +18,6 @@ const userCreate = Joi.object({
     .pattern(new RegExp())
     .required(),
   description: Joi.string().allow('').allow(null),
-  picture: Joi.string(),
   picture: Joi.string().allow('').allow(null),
   availability: Joi.boolean(),
   tags: Joi.array()
