@@ -116,8 +116,8 @@ const findOneUser = async(id) => {
     "user"."availability",
     "user"."picture",
     (
-      SELECT json_agg(json_build_object('id', "project"."id", 'user_id', "project"."user_id", 'title', "project"."title", 'description', "project"."description", 'availability', "project"."availability", 'user_pseudo', 'user_firstname', 'user_lastname', (
-        SELECT "user"."pseudo", "user"."firstname", "user"."lastname"
+      SELECT json_agg(json_build_object('id', "project"."id", 'user_id', "project"."user_id", 'title', "project"."title", 'description', "project"."description", 'availability', "project"."availability", 'user_pseudo', (
+        SELECT "user"."pseudo"
         FROM "user"
         WHERE "user"."id" = "project"."user_id"
       ), 'users', (

@@ -70,7 +70,6 @@ const userController = {
     res.json({status: 'success', data : user})
   },
 
-  // TODO : vérifier si nécessaire
   async getOneUserX(req, res) {
     const userId = req.params.id;
     const user = await userMapper.findOneUserX(userId);
@@ -86,7 +85,7 @@ const userController = {
   // méthode pour s'enregistrer / création d'un nouvel utilisateur
   // cette méthode récupère les données dans le body de la requête
   async register(req, res) {
-    const {lastname, firstname, email, pseudo, password, description, picture, availability, tags } = req.body;
+    const {lastname, firstname, email, pseudo, password, description, availability, tags } = req.body;
     const hashedPWD = await bcrypt.hash(password, 10);
 
     if (!lastname || !firstname || !email || !pseudo || !password) {
@@ -104,10 +103,11 @@ const userController = {
     }
 
     // Si un fichier a été téléchargé, appelez uploadPictures pour traiter la photo de profil
+    let picture;
     if (req.file) {
       picture = await uploadPictures(req, res, pseudo);
     } else {
-      picture = '/public/profilPictures/profil.webp';
+      picture = 'http://localhost:4000/public/profilPictures/';
     }
 
     await userMapper.createOneUser(lastname, firstname, email, pseudo, hashedPWD, description, picture, availability, tags);

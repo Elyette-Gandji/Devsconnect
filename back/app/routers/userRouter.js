@@ -10,7 +10,7 @@ const upload = require('../middlewares/multer');
 
 router.get('/', controllerHandler(userController.getAllUsers)); 
 router.get('/:id', controllerHandler(userController.getOneUser)); 
-router.get('/user/:id', controllerHandler(userController.getOneUserX)); // TODO vérifier si nécessaire
+router.get('/user/:id', controllerHandler(userController.getOneUserX));
 
 router.put('/:id', upload.single('picture'), validate(userUpdate, 'body'), authorize('modify', 'user'), controllerHandler(userController.editOneUser));
 

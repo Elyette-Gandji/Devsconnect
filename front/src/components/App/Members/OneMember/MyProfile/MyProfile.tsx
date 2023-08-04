@@ -560,6 +560,7 @@ function MyProfile() {
       handleSubmit(event);
     }
   };
+  console.log(member)
   // ? Rendu JSX
   return (
     <>

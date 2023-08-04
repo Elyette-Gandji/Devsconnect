@@ -22,7 +22,7 @@ const uploadPictures = async (req, res, pseudo) => {
     fs.renameSync(filePath, destinationPath);
 
     //  Obtenez l'URL du fichier
-    const fileUrl = `/public/profilPictures/${uniqueFileName}`;
+    const fileUrl = `http://localhost:4000/public/profilPictures/${uniqueFileName}`;
 
     return fileUrl;
   } catch (error) {
