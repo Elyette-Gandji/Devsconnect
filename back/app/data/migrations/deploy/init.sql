@@ -2,6 +2,8 @@
 
 BEGIN;
 
+DROP TABLE IF EXISTS "user", "project", "tag", "project_has_tag", "user_has_tag", "project_has_user";
+
 CREATE TABLE "user" (
     "id" INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     "lastname" VARCHAR(64) NOT NULL,

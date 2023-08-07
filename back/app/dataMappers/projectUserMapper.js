@@ -19,6 +19,18 @@ const createProjectHasUser = async (projectId, userId) => {
   return results.rows[0];
 };
 
+/*const createProjectHasUser = async(projectId, userId) => {
+  const preparedQuery = {
+    text: `INSERT INTO "project_has_user" ("project_id", "user_id") VALUES ($1, $2) RETURNING *`,
+    values: [projectId, userId],
+  };
+  const results = await client.query(preparedQuery);
+  if (!results.rows[0]) {
+    throw new ApiError('Relation not found', { statusCode: 204 });
+  }
+  return results.rows[0]; 
+};*/
+
 // TODO : vérifier que le owner du projet ne peut pas se supprimer pas lui-même
 const updateProjectHasUser = async(projectId, userId) => {
   const result = await client.query(`UPDATE "project_has_user" 
