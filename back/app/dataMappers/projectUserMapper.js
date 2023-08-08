@@ -26,7 +26,7 @@ const createProjectHasUser = async (projectId, userId) => {
 // TODO : vérifier que le owner du projet ne peut pas se supprimer pas lui-même
 const updateProjectHasUser = async(projectId, userId) => {
   const result = await client.query(`UPDATE "project_has_user" 
-    SET "is_active" = NOT"is_active"
+    SET "is_active" = NOT "is_active"
     WHERE "project_has_user"."project_id" = ${projectId} 
     AND "project_has_user"."user_id" = ${userId} 
     RETURNING *`
