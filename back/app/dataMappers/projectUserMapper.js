@@ -1,35 +1,27 @@
 const client = require('./database');
 const ApiError = require('../errors/apiError.js');
 
-//Si user_id de la table project est le même que user_id dans la table project_has_user, alors is_active = true
+//Si user_id de la table project est le même que user_id dans la table project_has_user, alors is_active = true en utilisant CASE WHEN 
 const createProjectHasUser = async (projectId, userId) => {
   const preparedQuery = {
     text: `
-    INSERT INTO "project_has_user" ("project_id", "user_id", "is_active")
-    SELECT $1, $2, CASE WHEN "project"."user_id" = $2 THEN TRUE ELSE FALSE END
-    FROM "project"
-    WHERE "project"."id" = $1
-    RETURNING *`,
+      INSERT INTO "project_has_user" ("project_id", "user_id", "is_active")
+      SELECT $1, $2, CASE WHEN "project"."user_id" = $2 THEN TRUE ELSE FALSE END
+      FROM "project"
+      WHERE "project"."id" = $1
+      RETURNING *
+    `,
     values: [projectId, userId],
   };
+  
   const results = await client.query(preparedQuery);
+  
   if (!results.rows[0]) {
     throw new ApiError('Relation not found', { statusCode: 204 });
   }
+  
   return results.rows[0];
 };
-
-/*const createProjectHasUser = async(projectId, userId) => {
-  const preparedQuery = {
-    text: `INSERT INTO "project_has_user" ("project_id", "user_id") VALUES ($1, $2) RETURNING *`,
-    values: [projectId, userId],
-  };
-  const results = await client.query(preparedQuery);
-  if (!results.rows[0]) {
-    throw new ApiError('Relation not found', { statusCode: 204 });
-  }
-  return results.rows[0]; 
-};*/
 
 // TODO : vérifier que le owner du projet ne peut pas se supprimer pas lui-même
 const updateProjectHasUser = async(projectId, userId) => {
