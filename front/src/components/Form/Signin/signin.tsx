@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 // ? Librairies
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -430,6 +429,7 @@ function Signin() {
     }
 
     // Si plusieurs champs sont vides, on affiche un message d'erreur général
+    console.log(falseFieldCount);
     if (falseFieldCount > 1) {
       dispatch(
         updateFlash({
@@ -447,6 +447,7 @@ function Signin() {
       objData.tags = selectedTagsData;
       objData.availability = !!checked;
       delete objData.cgu;
+      console.log(objData);
       dispatch(signinUser(objData)); // On envoie les données du formulaire à l'API
       dispatch(toggleModalSignin()); // On ferme la modale
       dispatch(toggleModalLogin()); // On ouvre la modale de connexion

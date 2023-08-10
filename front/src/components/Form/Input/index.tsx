@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 /* eslint-disable no-nested-ternary */
 // ? Librairies
 import { useId, useState } from 'react';

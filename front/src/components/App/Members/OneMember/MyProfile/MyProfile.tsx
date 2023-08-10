@@ -183,7 +183,16 @@ function MyProfile() {
    * qui affiche ou non la modale de suppression
    */
   const handleDeleteModale = () => {
-    dispatch(toggleModalDelete());
+    if (member?.projects.length !== 0) {
+      dispatch(
+        updateFlash({
+          type: 'error',
+          children: 'Vous ne pouvez pas supprimer votre profil si vous participez à un projet.',
+        })
+      );
+    } else {
+      dispatch(toggleModalDelete());
+    }
   };
 
   /** //* Fonction pour le bouton modifier le mot de passe
@@ -968,6 +977,7 @@ function MyProfile() {
                     ? 'Member--fourthField--container--delete'
                     : 'hidden'
                 }
+          
                 onClick={handleDeleteModale} // On appelle la fonction handleDeleteModale au clic sur le bouton
               >
                 Supprimer le profil

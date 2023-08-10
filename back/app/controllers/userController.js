@@ -111,7 +111,7 @@ const userController = {
     if (req.file) {
       picture = await uploadPicture(req, res, pseudo);
     } else {
-      picture = '/profilPictures/';
+      picture = 'http://localhost:4000/public/profilPictures/profil.webp';
     }
 
     await userMapper.createOneUser(lastname, firstname, email, pseudo, hashedPWD, description, availability, tags, picture);
