@@ -2,7 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const uploadPictures = async (req, res, pseudo) => {
+const uploadPicture = async (req, res, pseudo) => {
   if (!req.file) {
     return res.status(400).json({ message: 'Aucun fichier sélectionné' });
   }
@@ -22,7 +22,7 @@ const uploadPictures = async (req, res, pseudo) => {
     fs.renameSync(filePath, destinationPath);
 
     //  Obtenez l'URL du fichier
-    const fileUrl = `http://localhost:4000/public/profilPictures/${uniqueFileName}`;
+    const fileUrl = `/public/profilPictures/${uniqueFileName}`;
 
     return fileUrl;
   } catch (error) {
@@ -30,4 +30,4 @@ const uploadPictures = async (req, res, pseudo) => {
   }
 };
 
-module.exports = uploadPictures;
+module.exports = uploadPicture;

@@ -4,18 +4,18 @@ const projectUserMapper = require('./projectUserMapper');
 const ApiError = require('../errors/apiError.js');
 
 const findAllProjects = async () => {
-  const preparedQuery = {
-    text: `SELECT
+  const results = await client.query(`
+  SELECT
     "project"."id",
     "project"."title",
     "project"."description",
     "project"."availability",
     "project"."user_id",
-    (
+    (  
       SELECT "user"."pseudo"
       FROM "user"
       WHERE "user"."id" = "project"."user_id"
-    ) AS user_pseudo,
+  ) AS user_pseudo,
     (
       SELECT json_agg(json_build_object('id', "tag"."id", 'name', "tag"."name"))
       FROM (
@@ -37,12 +37,10 @@ const findAllProjects = async () => {
   FROM "project"
   GROUP BY
     "project"."id";
-  `};
-  const results = await client.query(preparedQuery);
-  return results.rows; 
-}
+  `);
+  return results.rows;
+};
 
-// TODO : à valider --> provide firstname and lastname instead of pseudo
 const findOneProject = async (id) => {
   const preparedQuery = {
     text: `SELECT
@@ -100,25 +98,24 @@ WHERE
   return results.rows[0];
 };
 
-
-const removeOneProject = async(id) => {
+const removeOneProject = async (id) => {
   const preparedQuery = {
-    text: `DELETE FROM "project" WHERE "id" = $1 RETURNING *`,
+    text: 'DELETE FROM "project" WHERE "id" = $1 RETURNING *',
     values: [id],
-  }
+  };
   // destructuration de tableau pour récupérer le premier élément
   const [results] = (await client.query(preparedQuery)).rows;
   if (!results) {
     throw new ApiError('Project already deleted', { statusCode: 204 });
   }
   return results;
-}
+};
 
-const createOneProject = async(title, description, availability, user_id, tags) => {
-  const preparedProjectQuery= {
-     text: `INSERT INTO "project" ("title", "description", "availability", "user_id") VALUES ($1, $2, $3, $4) RETURNING *`,
-     values: [title, description, availability, user_id]
-  }
+const createOneProject = async (title, description, availability, user_id, tags) => {
+  const preparedProjectQuery = {
+    text: 'INSERT INTO "project" ("title", "description", "availability", "user_id") VALUES ($1, $2, $3, $4) RETURNING *',
+    values: [title, description, availability, user_id],
+  };
   // destructuration de tableau pour récupérer le premier élément
   const [project] = (await client.query(preparedProjectQuery)).rows;
   if (!project) {
@@ -128,8 +125,8 @@ const createOneProject = async(title, description, availability, user_id, tags) 
   // opérateur d'accès conditionnel (?.) remplace if pour gérer les cas où currentProject.tags ou projectUpdate.tags sont null ou undefined
   const addTagsToProject = tags?.map(async (tagId) => {
     const preparedTagQuery = {
-        text: `INSERT INTO "project_has_tag" ("project_id", "tag_id") VALUES ($1, $2) RETURNING *`,
-        values: [project.id, tagId],
+      text: 'INSERT INTO "project_has_tag" ("project_id", "tag_id") VALUES ($1, $2) RETURNING *',
+      values: [project.id, tagId],
     };
     // destructuration de tableau pour récupérer le premier élément
     const [tagResults] = (await client.query(preparedTagQuery)).rows;
@@ -159,26 +156,22 @@ const createOneProject = async(title, description, availability, user_id, tags) 
 
 const updateOneProject = async (projectId, projectUpdate) => {
   const currentProject = await findOneProject(projectId);
-console.log(currentProject);
-  console.log(projectUpdate);
   if (!currentProject) {
     throw new ApiError('Project not found', { statusCode: 204 });
   }
 
   const UpdatedTags = projectUpdate.tags;
-  const currentProjectTags = currentProject.tags ? currentProject.tags.map(tag => tag.tag_id) : [];
-  
+  const currentProjectTags = currentProject.tags ? currentProject.tags.map((tag) => tag.id) : [];
   // Id des tags au lieu des objets complets
-  const tagsToDelete = currentProjectTags?.filter(tagId => !UpdatedTags?.includes(tagId)) || [];
-    for (const tagId of tagsToDelete) {
-      await projectTagMapper.deleteProjectHasTag(projectId, tagId);
-    }
-    
-  const tagsToAdd = UpdatedTags?.filter(tagId => !currentProjectTags?.includes(tagId)) || [];
-    for (const tagId of tagsToAdd) {
-      await projectTagMapper.createProjectHasTag(projectId, tagId);
-    }
+  const tagsToDelete = currentProjectTags?.filter((tagId) => !UpdatedTags?.includes(tagId)) || [];
+  for (const tagId of tagsToDelete) {
+    await projectTagMapper.deleteProjectHasTag(projectId, tagId);
+  }
 
+  const tagsToAdd = UpdatedTags?.filter((tagId) => !currentProjectTags?.includes(tagId)) || [];
+  for (const tagId of tagsToAdd) {
+    await projectTagMapper.createProjectHasTag(projectId, tagId);
+  }
   const preparedQuery = {
     text: `UPDATE "project" 
       SET title = COALESCE($1, title), 
@@ -193,16 +186,16 @@ console.log(currentProject);
   return results;
 };
 
-const findProjectOwner = async(projectId) => {
+const findProjectOwner = async (projectId) => {
   const preparedQuery = {
     text: `SELECT "project"."user_id" FROM "project"
            WHERE "project"."id" = $1`,
     values: [projectId],
   };
-// destructuration de tableau pour récupérer le premier élément
+  // destructuration de tableau pour récupérer le premier élément
   const [results] = (await client.query(preparedQuery)).rows;
   return results.user_id;
-}
+};
 
 module.exports = {
   findAllProjects,
@@ -210,5 +203,5 @@ module.exports = {
   removeOneProject,
   createOneProject,
   updateOneProject,
-  findProjectOwner
+  findProjectOwner,
 };

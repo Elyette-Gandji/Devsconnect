@@ -493,29 +493,31 @@ function Signin() {
         >
           <legend className="Modale--legend">Informations personnelles</legend>
 
-          <div className="BigForm--container--image">
-            <img
-              className="BigForm--container--image--profil"
-              src={
-                formFields.picture.value.includes('blob')
-                  ? formFields.picture.value
-                  : '/images/profil/profil.svg'
-              }
-              alt="profil"
-              onClick={handleUploadClick}
-              onKeyDown={handleUploadClick}
-              role="button"
-              tabIndex={0}
-            />
-            <img
-              src="/images/profil/upload.svg"
-              className="BigForm--container--image--upload"
-              alt="upload"
-              onClick={handleUploadClick}
-              onKeyDown={handleUploadClick}
-              role="button"
-              tabIndex={0}
-            />
+          <div className="BigForm--container">
+            <div className="BigForm--container--image">
+              <img
+                className="BigForm--container--image--profil"
+                src={
+                  formFields.picture.value.includes('blob')
+                    ? formFields.picture.value
+                    : '/images/profil/profil.svg'
+                }
+                alt="profil"
+                onClick={handleUploadClick}
+                onKeyDown={handleUploadClick}
+                role="button"
+                tabIndex={0}
+              />
+              <img
+                src="/images/profil/upload.svg"
+                className="BigForm--container--image--upload"
+                alt="upload"
+                onClick={handleUploadClick}
+                onKeyDown={handleUploadClick}
+                role="button"
+                tabIndex={0}
+              />
+            </div>
             <input
               id="picture"
               type="file"
@@ -683,7 +685,7 @@ function Signin() {
             <Input
               id="description"
               name="description"
-              slot="A propose de moi"
+              slot="A propos de moi"
               type="text"
               placeholder="Une petite présentation ?"
               aria-label="A propos de moi"
@@ -758,7 +760,13 @@ function Signin() {
             </div>
             <div className="Modale--other--cgu">
               <div className="Modale--other--cgu--container">
-                <label htmlFor="cgu">J&apos;accepte les CGU</label>
+                <Link
+                  to="/cgu"
+                  target="_blank"
+                  className="Modale--other--link-cgu"
+                >
+                  <label htmlFor="cgu">J&apos;accepte les CGU</label>
+                </Link>
                 <Checkbox
                   id="cgu"
                   onChange={handleCguChange}
@@ -769,13 +777,6 @@ function Signin() {
                   className="Modale--other--cgu--checkbox"
                 />
               </div>
-              <Link
-                to="/cgu"
-                target="_blank"
-                className="Modale--other--link-cgu"
-              >
-                (voir les CGU)
-              </Link>
             </div>
             <button type="submit" className="Modale--form--container--confirm">
               S&apos;inscrire

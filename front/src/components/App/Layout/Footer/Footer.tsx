@@ -7,7 +7,7 @@ function Footer() {
   // ? Rendu JSX
   return (
     <div className="Footer">
-      <a className="Footer--contact" href="mailto:lionelcaro74@gmail.com">
+      <a className="Footer--contact" href="mailto:exemple@gmail.com">
         Me contacter
       </a>
       <p className="Footer--copyright">

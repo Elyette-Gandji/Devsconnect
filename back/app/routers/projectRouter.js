@@ -65,7 +65,7 @@ module.exports = router;
  *               id:
  *                 type: integer
  *               name:
- *                 type: string  
+ *                 type: string
  *           description: Array with all tags of the project
  *         users:
  *           type: array
@@ -75,7 +75,7 @@ module.exports = router;
  *               id:
  *                 type: integer
  *               pseudo:
- *                 type: string  
+ *                 type: string
  *               availability:
  *                 type: boolean
  *           description: Array of objects for the users of the project
@@ -172,7 +172,7 @@ module.exports = router;
  * /api/projects:
  *   get:
  *     summary: Returns the list of all the projects
- *     tags: [Projects]   
+ *     tags: [Projects]
  *     responses:
  *       200:
  *         description: The list of the projects

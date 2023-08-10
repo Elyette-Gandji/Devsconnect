@@ -7,7 +7,6 @@ const projectCreate = Joi.object({
   description: Joi.string()
     .max(500)
     .required(),
-  picture: Joi.string(),
   availability: Joi.boolean(),
   user_id: Joi.number().integer(),
   tags: Joi.array()
@@ -19,7 +18,6 @@ const projectUpdate = Joi.object({
     .max(30),
   description: Joi.string()
     .max(500),
-  picture: Joi.string(),
   availability: Joi.boolean(),
   user_id: Joi.number().integer(),
   tags: Joi.array()

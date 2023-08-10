@@ -90,7 +90,7 @@ function Projects() {
   if (projects.length === 0) {
     return (
       <NotFound
-        errorMessage="Désolé, le serveur ne répond pas"
+        errorMessage="Désolé, aucun projet disponible pour le moment"
         errorStatus={500}
       />
     );

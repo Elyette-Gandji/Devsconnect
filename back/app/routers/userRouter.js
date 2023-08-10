@@ -4,17 +4,18 @@ const controllerHandler = require('../helpers/controllerHandler');
 const { userUpdate } = require('../validations/userSchema');
 const validate = require('../validations/validate');
 const { authorize } = require('../auth');
+
+const upload = require('../middleware/multer');
+
 const router = express.Router();
 
-const upload = require('../middlewares/multer');
-
-router.get('/', controllerHandler(userController.getAllUsers)); 
-router.get('/:id', controllerHandler(userController.getOneUser)); 
+router.get('/', controllerHandler(userController.getAllUsers));
+router.get('/:id', controllerHandler(userController.getOneUser));
 router.get('/user/:id', controllerHandler(userController.getOneUserX));
 
 router.put('/:id', upload.single('picture'), validate(userUpdate, 'body'), authorize('modify', 'user'), controllerHandler(userController.editOneUser));
 
-router.delete('/:id', authorize('delete', 'user'), controllerHandler(userController.deleteOneUser)); 
+router.delete('/:id', authorize('delete', 'user'), controllerHandler(userController.deleteOneUser));
 
 router.post('/checkPassword', controllerHandler(userController.checkPassword));
 router.post('/checkEmail', controllerHandler(userController.checkEmail));
@@ -58,7 +59,7 @@ module.exports = router;
 *         description:
 *           type: string
 *           description: The user pseudo
-*         availability: 
+*         availability:
 *           type: boolean
 *           description: The user availability
 *         tags:
@@ -69,7 +70,7 @@ module.exports = router;
 *               id:
 *                 type: integer
 *               name:
-*                 type: string  
+*                 type: string
 *           description: Array with all tags of the user
 *         projects:
 *           type: array
@@ -79,12 +80,12 @@ module.exports = router;
 *               id:
 *                 type: integer
 *               title:
-*                 type: string  
+*                 type: string
 *           description: Array of objects for the projects of the user
-*         created_at: 
+*         created_at:
 *           type: timestamp
 *           description: The auto-generated time of the user's creation
-*         updated_at: 
+*         updated_at:
 *           type: timestamp
 *           description: The auto-generated time of the user's update
 *       example:
@@ -129,7 +130,7 @@ module.exports = router;
 *         description:
 *           type: string
 *           description: The user pseudo
-*         availability: 
+*         availability:
 *           type: boolean
 *           description: The user availability
 *         tags:
@@ -179,7 +180,7 @@ module.exports = router;
 *         description:
 *           type: string
 *           description: The user pseudo
-*         availability: 
+*         availability:
 *           type: boolean
 *           description: The user availability
 *         tags:
@@ -303,7 +304,7 @@ module.exports = router;
  *            $ref: '#/components/schemas/Users login'
  *    responses:
  *      200:
- *        description: Successful connection 
+ *        description: Successful connection
  *        content:
  *          application/json:
  *            schema:

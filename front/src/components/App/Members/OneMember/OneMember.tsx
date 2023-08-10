@@ -62,7 +62,7 @@ function OneMember() {
   if (!member) {
     return (
       <NotFound
-        errorMessage="Désolé, ce membre est momentanément indisponible"
+        errorMessage="Désolé, ce membre semble introuvable"
         errorStatus=""
       />
     );

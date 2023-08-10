@@ -105,7 +105,7 @@ function OneProject() {
   if (!project) {
     return (
       <NotFound
-        errorMessage="Désolé, ce projet est momentanément indisponible"
+        errorMessage="Désolé, ce projet semble introuvable"
         errorStatus=""
       />
     );

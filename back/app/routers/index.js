@@ -1,13 +1,13 @@
 const express = require('express');
 
 const { ApiError, errorHandler } = require('../helpers/errorHandler');
-const controllerHandler = require("../helpers/controllerHandler");
+const controllerHandler = require('../helpers/controllerHandler');
 
 const projectRouter = require('./projectRouter');
 const userRouter = require('./userRouter');
 const tagRouter = require('./tagRouter');
 
-const upload = require('../middlewares/multer');
+const upload = require('../middleware/multer');
 
 // require pour JWT authController pour les routes login et refresh et authorize pour les verifs de validite et regles d'acces
 const userController = require('../controllers/userController');
@@ -29,7 +29,7 @@ router.post('/refresh-token', controllerHandler(userController.tokenRefresh));
 router.use('/api/projects', projectRouter);
 router.use('/api/users', userRouter);
 router.use('/api/tags', tagRouter);
-// 
+//
 router.use(() => {
   throw new ApiError('API Route not found', { statusCode: 404 });
 });

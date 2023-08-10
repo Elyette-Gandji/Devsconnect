@@ -12,7 +12,7 @@ CREATE TABLE "user" (
     "pseudo" VARCHAR(64) NOT NULL UNIQUE,
     "password" VARCHAR(64) NOT NULL,
     "description" TEXT,
-    "picture" TEXT,
+    "picture" VARCHAR(255) NOT NULL DEFAULT 'profil.webp',
     "availability" BOOLEAN DEFAULT FALSE,
     "refresh_token" TEXT,
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
