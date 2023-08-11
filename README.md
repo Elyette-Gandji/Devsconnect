@@ -1,5 +1,11 @@
 # Devsconnect
-O'clock TP project
+Site de mise en relation entre développeurs et collaboration sur des projets Web, dans une logique d'open-source.
+
+## Launch
+
+- start backend: cd ./back && npm run start
+- start frontend: cd ./front && npm run start
+- start both concurrently: cd && npm run start
 
 ## Backend
 
