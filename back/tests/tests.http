@@ -1,4 +1,4 @@
-@baseUrl = http://localhost:4000/
+@baseUrl = http://localhost:4000
 @accessToken = {{login.response.body.$.data.accessToken}}
 @refreshToken = {{login.response.body.$.data.refreshToken}}
 
@@ -52,7 +52,7 @@ Authorization: Bearer
 # @name editUser
 PUT {{baseUrl}}/api/users/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MTY2NDU1NywiZXhwIjoxNjkxNjY1NDU3fQ.alb-XU9DH-fPqLay0pwEHU2A_uMIYXb7YdaDdb2YlLU
+Authorization: Bearer 
 
 {
   "lastname": "Black",
@@ -72,7 +72,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiO
 # @name deleteUser
 DELETE {{baseUrl}}/api/users/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MTY2NDU1NywiZXhwIjoxNjkxNjY1NDU3fQ.alb-XU9DH-fPqLay0pwEHU2A_uMIYXb7YdaDdb2YlLU
+Authorization: Bearer 
 
 ###
 
@@ -93,7 +93,7 @@ Authorization: Bearer
 # @name createProject
 POST {{baseUrl}}/api/projects
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
+Authorization: Bearer
 
 {
   "title": "Harry Potter",
@@ -111,7 +111,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiO
 # @name editProject
 PUT {{baseUrl}}/api/projects/25
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
+Authorization: Bearer 
 
 {
   "title": "Harry Potter 2",
@@ -137,21 +137,21 @@ Authorization: Bearer
 # @name applyToProject
 POST {{baseUrl}}/api/projects/3/user/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MDgyNzUzOCwiZXhwIjoxNjkwODI4NDM4fQ.mKTxXeiPqPdNyqz4C50fTW5gNnl2ARS8cFH_xXJcUxk
+Authorization: Bearer 
 
 ###
 
 # @name addUserToProject
 PUT {{baseUrl}}/api/projects/3/user/51
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiUmFwaGFlbC5NYXJpZUBnbWFpbC5jb20iLCJpZCI6MjN9LCJpYXQiOjE2OTA4Mjc5ODUsImV4cCI6MTY5MDgyODg4NX0.Y1upsPlkdFT-Q4vvmkk2mZKiCWpXCQN7ZA9VCMk0IV4
+Authorization: Bearer 
 
 ###
 
 # @name removeUserToProject
 DELETE {{baseUrl}}/api/projects/1/user/3
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiY2FwdGFpbkBnbWFpbC5jb20iLCJpZCI6Mn0sImlhdCI6MTY4NzQyODEzMiwiZXhwIjoxNjg3NDgyMTMyfQ._XQgPEyfHOAOzBY-uXzYz_gSazIDA1jjbXrcYRL-mCc
+Authorization: Bearer 
 
 ###
 
