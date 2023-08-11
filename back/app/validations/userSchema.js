@@ -14,10 +14,11 @@ const userCreate = Joi.object({
     .email({ minDomainSegments: 2 })
     .required(),
   password: Joi.string()
-  // regex exemple not implemented for demo "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
     .pattern(new RegExp())
     .required(),
-  description: Joi.string(),
+  description: Joi.string()
+    .required(),
+  picture: Joi.string(),
   availability: Joi.boolean(),
   tags: Joi.array()
     .items(Joi.number().integer()),
@@ -33,9 +34,9 @@ const userUpdate = Joi.object({
   email: Joi.string()
     .email({ minDomainSegments: 2 }),
   password: Joi.string().allow('')
-    // regex exemple not implemented for demo "^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
     .pattern(new RegExp()),
   description: Joi.string(),
+  picture: Joi.string(),
   availability: Joi.boolean(),
   tags: Joi.array()
     .items(Joi.number().integer()),

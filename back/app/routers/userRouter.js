@@ -41,12 +41,12 @@ module.exports = router;
 *         id:
 *           type: integer
 *           description: The auto-generated id of the user
-*         lastname:
-*           type: string
-*           description: The user lastname
 *         firstname:
 *           type: string
 *           description: The user firstname
+*         lastname:
+*           type: string
+*           description: The user lastname
 *         email:
 *           type: string
 *           description: The user email
@@ -58,7 +58,10 @@ module.exports = router;
 *           description: The user password
 *         description:
 *           type: string
-*           description: The user pseudo
+*           description: The user description
+*         picture:
+*           type: string
+*           description: The user profile picture
 *         availability:
 *           type: boolean
 *           description: The user availability
@@ -71,7 +74,6 @@ module.exports = router;
 *                 type: integer
 *               name:
 *                 type: string
-*           description: Array with all tags of the user
 *         projects:
 *           type: array
 *           items:
@@ -79,14 +81,47 @@ module.exports = router;
 *             properties:
 *               id:
 *                 type: integer
+*               user_id:
+*                 type: integer
 *               title:
 *                 type: string
-*           description: Array of objects for the projects of the user
+*               description: 
+*                 type: string
+*               availability:
+*                 type: boolean
+*               user_pseudo:
+*                 type: string
+*               participants:
+*                 type: array
+*                 items:
+*                   type: object
+*                   properties:
+*                     user_id:
+*                       type: integer
+*                     firstname:
+*                       type: string
+*                     lastname:
+*                       type: string
+*                     pseudo:
+*                       type: string
+*                     availability:
+*                       type: boolean
+*               tags:
+*                 type: array
+*                 items:
+*                   type: object
+*                   properties:
+*                     tag_id:
+*                       type: integer
+*                     name:
+*                       type: string
 *         created_at:
-*           type: timestamp
+*           type: string
+*           format: date-time
 *           description: The auto-generated time of the user's creation
 *         updated_at:
-*           type: timestamp
+*           type: string
+*           format: date-time
 *           description: The auto-generated time of the user's update
 *       example:
 *         id: 1
@@ -96,9 +131,10 @@ module.exports = router;
 *         pseudo: Moussaillon
 *         password: harengs1234
 *         description: Vieux loup de mer
+*         picture: https://cdn001.tintin.com/public/tintin/img/characters/le-capitaine-haddock/le-capitaine-haddock.png
 *         availability: true
 *         tags: [{id: 1, name: Java}]
-*         projects: [{id: 1, title: DevsConnect}]
+*         projects: [{id: 1, title: DevsConnect}, {"user_id": 1, "firstname": "Aldonce", "lastname": "Lucas", "pseudo": "Charles_Dupont33", "is_active": false}, {"tag_id": 1, "name": "Java"}]
 *         created_at: "2023-06-06T19:08:42.845Z"
 *         updated_at: "2023-06-07T08:08:42.845Z"
 */
@@ -130,6 +166,9 @@ module.exports = router;
 *         description:
 *           type: string
 *           description: The user pseudo
+*         picture:
+*           type: string
+*           description: The user profile picture
 *         availability:
 *           type: boolean
 *           description: The user availability
@@ -145,6 +184,7 @@ module.exports = router;
 *         pseudo: Moussaillon
 *         password: harengs1234
 *         description: Vieux loup de mer
+*         picture: https://cdn001.tintin.com/public/tintin/img/characters/le-capitaine-haddock/le-capitaine-haddock.png
 *         availability: true
 *         tags: [ 1, 2 ]
 */
@@ -161,6 +201,7 @@ module.exports = router;
 *         - email
 *         - pseudo
 *         - password
+*         - description
 *       properties:
 *         lastname:
 *           type: string
@@ -180,6 +221,9 @@ module.exports = router;
 *         description:
 *           type: string
 *           description: The user pseudo
+*         picture:
+*           type: string
+*           description: The user profile picture
 *         availability:
 *           type: boolean
 *           description: The user availability
@@ -195,6 +239,7 @@ module.exports = router;
 *         pseudo: Moussaillon
 *         password: harengs1234
 *         description: Vieux loup de mer
+*         picture: https://cdn001.tintin.com/public/tintin/img/characters/le-capitaine-haddock/le-capitaine-haddock.png
 *         availability: true
 *         tags: [ 1, 2 ]
 */
