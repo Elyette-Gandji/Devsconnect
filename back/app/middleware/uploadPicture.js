@@ -15,8 +15,7 @@ const uploadPicture = async (req, res, pseudo) => {
   const uniqueFileName = `${pseudo}-${Date.now()}-${file.originalname}`;
 
   // Construisez le chemin d'accès complet pour le fichier de destination permanent
-  const destinationPath = path.join(__dirname, '../../public/profilPictures', uniqueFileName);
-
+  const destinationPath = path.join(__dirname, '../../../public/profilPictures', uniqueFileName);
   try {
     // Déplacez le fichier vers le dossier de destination permanent de manière synchrone
     fs.renameSync(filePath, destinationPath);

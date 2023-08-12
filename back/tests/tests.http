@@ -9,7 +9,7 @@ content-type: application/json
 
 {
     "email": "sirius@gmail.com",
-    "password": "secret"
+    "password": "Harry!87"
 }
 
 ###
@@ -24,9 +24,9 @@ Authorization: Bearer
   "firstname": "Sirius ",
   "email": "sirius@gmail.com",
   "pseudo": "Sisi",
-  "password": "secret",
+  "password": "Harry!87",
   "description": "Tout droit sorti d'Azkaban",
-  "availability": true,
+  "availability": false,
   "tags": [
     1,
     2
@@ -43,7 +43,7 @@ Authorization: Bearer
 ###
 
 # @name getOneUser
-GET {{baseUrl}}/api/users/1
+GET {{baseUrl}}/api/users/51
 content-type: application/json
 Authorization: Bearer 
 
@@ -52,19 +52,20 @@ Authorization: Bearer
 # @name editUser
 PUT {{baseUrl}}/api/users/51
 content-type: application/json
-Authorization: Bearer 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoic2lyaXVzQGdtYWlsLmNvbSIsImlkIjo1MX0sImlhdCI6MTY5MTg1OTU2MCwiZXhwIjoxNjkxODYwNDYwfQ.FK5YdDNXVfALHS3jhn1Hzffstm-uCwpw6E-VzAcxvm4
 
 {
   "lastname": "Black",
   "firstname": "Sirius ",
   "email": "sirius@gmail.com",
-  "pseudo": "Sisi",
-  "password": "secret",
+  "pseudo": "Soso",
+  "password": "Harry!87",
   "description": "Tout droit sorti d'Azkaban",
   "availability": true,
   "tags": [
-    1,
-    2
+    2,
+    3,
+    6
   ]
 }
 
@@ -85,7 +86,7 @@ Authorization: Bearer
 ###
 
 # @name getOneProject
-GET {{baseUrl}}/api/projects/24
+GET {{baseUrl}}/api/projects/20
 content-type: application/json
 Authorization: Bearer 
 
@@ -99,7 +100,7 @@ Authorization: Bearer
 {
   "title": "Harry Potter",
   "description": "Lorem ipsum blabla",
-  "availability": true,
+  "availability": false,
   "user_id": 51,
   "tags": [
     1,
@@ -110,7 +111,7 @@ Authorization: Bearer
 ###
 
 # @name editProject
-PUT {{baseUrl}}/api/projects/25
+PUT {{baseUrl}}/api/projects/21
 content-type: application/json
 Authorization: Bearer 
 
@@ -135,14 +136,14 @@ Authorization: Bearer
 ###
 
 # @name applyToProject
-POST {{baseUrl}}/api/projects/3/user/51
+POST {{baseUrl}}/api/projects/3/user/
 content-type: application/json
 Authorization: Bearer 
 
 ###
 
 # @name addUserToProject
-PUT {{baseUrl}}/api/projects/3/user/51
+PUT {{baseUrl}}/api/projects/3/user/
 content-type: application/json
 Authorization: Bearer 
 
