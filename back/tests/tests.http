@@ -8,8 +8,8 @@ POST {{baseUrl}}/login
 content-type: application/json
 
 {
-    "email": "sirius@gmail.com",
-    "password": "Harry!87"
+    "email": "Andree67@yahoo.fr",
+    "password": "secret"
 }
 
 ###
@@ -95,13 +95,13 @@ Authorization: Bearer
 # @name createProject
 POST {{baseUrl}}/api/projects
 content-type: application/json
-Authorization: Bearer
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlwIjoiOjpmZmZmOjEyNy4wLjAuMSIsImVtYWlsIjoiQW5kcmVlNjdAeWFob28uZnIiLCJpZCI6N30sImlhdCI6MTY5MTg3MTU4NCwiZXhwIjoxNjkxODcyNDg0fQ.wAjBhD_0yR-1-sXc6E5UaKRz-21IvbrPoXCeell6vxI
 
 {
   "title": "Harry Potter",
   "description": "Lorem ipsum blabla",
-  "availability": false,
-  "user_id": 51,
+  "availability": true,
+  "user_id": 7,
   "tags": [
     1,
     3
